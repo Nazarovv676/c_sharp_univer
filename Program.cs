@@ -4,20 +4,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab3Sharp
+namespace Lab4Sharp
 {
-    enum TimeWork
-    {
-        FullTime,
-        PartTime,
-        Free
-    }
 
     class Program
     {
         static void Main(string[] args)
         {
-            Lab3Demo();
+            Lab4Demo();
+        }
+
+        private static void SimplePrinter(object sender, EmployeeCollectionHandlerEventArgs args) {
+            System.Console.WriteLine(args.ToString());
+        }
+
+        private static void Lab4Demo()
+        {
+            EmployeeCollection employees = new EmployeeCollection("collection1");
+            employees.Added += SimplePrinter;
+            employees.Replaced += SimplePrinter;
+
+            employees.Add(new Employee());
+            employees.Replace(0, new Employee());
+            employees[0] = new Employee();
+
+            employees.AddDefaults();
         }
 
         private static void Lab3Demo()

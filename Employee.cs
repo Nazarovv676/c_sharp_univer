@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections;
 
-namespace Lab3Sharp
+namespace Lab4Sharp
 {
+    enum TimeWork
+    {
+        FullTime,
+        PartTime,
+        Free
+    }
+
     class Employee : Person, IEnumerable
     {
         private string position;
