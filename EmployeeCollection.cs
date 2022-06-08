@@ -28,6 +28,11 @@ namespace Lab4Sharp {
 
         public EmployeeCollection(string id) {
             Id = id;
+            Added = EmptyListener;
+            Replaced = EmptyListener;
+        }
+
+        private static void EmptyListener(object sender, EmployeeCollectionHandlerEventArgs args) {
         }
 
         public string Id 
@@ -40,9 +45,10 @@ namespace Lab4Sharp {
 
         private void OnAdded()
         {
-            Added(this, new EmployeeCollectionHandlerEventArgs(Id,
-                "Element added",
-                employees.Count - 1));
+            if(Added != null)
+                Added(this, new EmployeeCollectionHandlerEventArgs(Id,
+                    "Element added",
+                    employees.Count - 1));
         }
 
         private void OnReplaced(int index)
@@ -85,6 +91,11 @@ namespace Lab4Sharp {
                 "Actor",
                 TimeWork.FullTime,
                 1999));
+        }
+
+        public override string ToString()
+        {
+            return String.Join(", ", employees.Select(employee => employee.ToString()).ToArray());
         }
     } 
 }

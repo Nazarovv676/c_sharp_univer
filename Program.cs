@@ -20,15 +20,29 @@ namespace Lab4Sharp
 
         private static void Lab4Demo()
         {
-            EmployeeCollection employees = new EmployeeCollection("collection1");
-            employees.Added += SimplePrinter;
-            employees.Replaced += SimplePrinter;
+            EmployeeCollection employees1 = new EmployeeCollection("collection1");
+            EmployeeCollection employees2 = new EmployeeCollection("collection2");
+            Listener listener1 = new Listener();
+            Listener listener2 = new Listener();
+            listener1.SubscribeToAdded(employees1);
+            listener1.SubscribeToReplaced(employees1);
+            listener2.SubscribeToAdded(employees1);
+            listener2.SubscribeToAdded(employees2);
+            // listener2.SubscribeToReplaced(employees2);
+            
+            employees1.Add(new Employee());
+            employees1.Replace(0, new Employee());
+            employees1.AddDefaults();
+            employees1[1] = new Employee();
+            employees1[0] = new Employee();
 
-            employees.Add(new Employee());
-            employees.Replace(0, new Employee());
-            employees[0] = new Employee();
+            employees2.Add(new Employee());
+            employees2.AddDefaults();
+            employees2[0] = new Employee();
 
-            employees.AddDefaults();
+            System.Console.WriteLine(listener1.ToString());
+            System.Console.WriteLine();
+            System.Console.WriteLine(listener2.ToString());
         }
 
         private static void Lab3Demo()
